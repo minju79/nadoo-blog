@@ -14,21 +14,21 @@ export default function Hero() {
                         transition={{ duration: 0.5 }}
                     >
                         <span className="inline-block py-1.5 px-4 rounded-full bg-blue-500/10 text-blue-500 text-sm font-semibold mb-6 border border-blue-500/20">
-                            NADOO AI : Real Estate Automation
+                            NADOO_AI : Real Estate Automation
                         </span>
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 pb-2">
                             콘텐츠는 AI가. <br />
                             계약은 중개사가.
                         </h1>
                         <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-                            "NADOO AI 에이전트"를 위한 완벽한 솔루션. <br />
+                            "NADOO_AI 에이전트"를 위한 완벽한 솔루션. <br />
                             블로그 포스팅부터 고객 관리까지, 이제 숨만 쉬어도 홍보가 됩니다.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link href="#apply" className="w-full sm:w-auto">
                                 <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white rounded-full font-bold text-lg hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
-                                    Get Survival Package
+                                    맞춤 AI 제작 문의
                                 </button>
                             </Link>
                             <Link href="/blog" className="w-full sm:w-auto">

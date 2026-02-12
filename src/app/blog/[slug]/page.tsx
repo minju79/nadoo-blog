@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     return {
-        title: `${post.title} | Nadoo AI Blog`,
+        title: `${post.title} | NADOO_AI Blog`,
         description: post.excerpt,
     };
 }

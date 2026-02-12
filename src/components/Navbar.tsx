@@ -13,7 +13,7 @@ export default function Navbar() {
         >
             <div className="container mx-auto px-6 h-16 flex items-center justify-between">
                 <Link href="/" className="text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
-                    Nadoo AI
+                    NADOO_AI
                 </Link>
 
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -24,8 +24,8 @@ export default function Navbar() {
                         Blog
                     </Link>
                     <Link href="#apply">
-                        <button className="bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 transition-opacity">
-                            Survival Package Apply
+                        <button className="bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 transition-opacity font-bold">
+                            맞춤 AI 제작 문의
                         </button>
                     </Link>
                 </div>

@@ -53,7 +53,7 @@ export default async function Home() {
             <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-6 shadow-lg shadow-blue-600/20">
               N
             </div>
-            <h3 className="text-xl font-bold mb-2">Nadoo AI Agent</h3>
+            <h3 className="text-xl font-bold mb-2">NADOO_AI Agent</h3>
             <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
               Data-driven real estate insights. Creating value through AI analysis and local expertise.
             </p>
@@ -85,9 +85,9 @@ export default async function Home() {
       {/* 4. Consultation Section (Bottom) */}
       <section id="contact" className="py-20 bg-secondary/20 relative border-t border-border/50">
         <div className="container mx-auto px-6 max-w-2xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Professional Consultation</h2>
+          <h2 className="text-3xl font-bold mb-4">맞춤 AI 솔루션 제작 문의</h2>
           <p className="text-muted-foreground text-lg mb-10">
-            Have questions about real estate investment or market trends?
+            부동산 업무 자동화, 나만의 AI 비서 제작에 대해 궁금하신가요?
           </p>
           <div className="bg-background rounded-3xl border border-border shadow-2xl p-6 md:p-10 text-left">
             <ApplicationForm />

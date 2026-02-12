@@ -96,7 +96,7 @@ export default function ApplicationForm() {
                 disabled={loading}
                 className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity disabled:opacity-50"
             >
-                {loading ? "Submitting..." : "Apply for Survival Package"}
+                {loading ? "처리중..." : "맞춤 AI 솔루션 문의하기"}
             </button>
 
             <p className="text-xs text-center text-muted-foreground mt-4">
