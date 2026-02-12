@@ -27,43 +27,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="features" className="py-20">
+      <section id="services" className="py-20">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-16">Why Choose Survival Package?</h2>
+          <h2 className="text-3xl font-bold mb-16">모든 AI 부동산 서비스</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-8 rounded-3xl bg-background border border-border shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">⚡</div>
-              <h3 className="text-xl font-bold mb-4">Fully Automated</h3>
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">📊</div>
+              <h3 className="text-xl font-bold mb-4">AI 부동산 분석</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Connect RSS feeds and AI to generate high-quality blog posts automatically, 24/7.
+                빅데이터와 AI를 활용하여 광주/광산구 지역의 정확한 시세와 전망을 분석해드립니다.
               </p>
             </div>
             <div className="p-8 rounded-3xl bg-background border border-border shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">✨</div>
-              <h3 className="text-xl font-bold mb-4">Premium Design</h3>
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">🏠</div>
+              <h3 className="text-xl font-bold mb-4">맞춤 매물 추천</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Impress clients with a professional, high-performance website that looks great on any device.
+                고객님의 라이프스타일과 예산에 딱 맞는 최적의 매물을 AI가 찾아드립니다.
               </p>
             </div>
             <div className="p-8 rounded-3xl bg-background border border-border shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">🎯</div>
-              <h3 className="text-xl font-bold mb-4">Lead Capture</h3>
+              <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">💬</div>
+              <h3 className="text-xl font-bold mb-4">전문가 상담</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Integrated application forms to capture high-value leads directly to your Supabase database.
+                복잡한 부동산 세금, 법률 문제까지. 전문 공인중개사가 친절하게 상담해드립니다.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="apply" className="py-20 bg-secondary/20 relative overflow-hidden">
+      <section id="contact" className="py-20 bg-secondary/20 relative overflow-hidden">
         <div className="absolute inset-0 bg-blue-500/5 blur-[100px] -z-10" />
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Join the Revolution</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">무료 상담 신청</h2>
             <p className="text-muted-foreground text-lg">
-              Secure your spot in the Nadoo AI Survival Package.
-              We are accepting a limited number of applicants to ensure quality.
+              궁금한 점이 있으신가요? 연락처를 남겨주시면 빠르게 안내해드리겠습니다.
             </p>
           </div>
           <div className="bg-background rounded-3xl border border-border shadow-xl p-1 md:p-8">

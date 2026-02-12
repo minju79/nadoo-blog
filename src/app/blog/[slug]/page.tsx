@@ -7,16 +7,17 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 interface Props {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }
 
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
     const { data: post } = await supabase
         .from("posts")
         .select("title, excerpt")
-        .eq("slug", params.slug)
+        .eq("slug", slug)
         .single();
 
     if (!post) {
@@ -32,10 +33,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
+    const { slug } = await params;
     const { data: post } = await supabase
         .from("posts")
         .select("*")
-        .eq("slug", params.slug)
+        .eq("slug", slug)
         .single();
 
     if (!post) {
