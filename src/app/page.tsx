@@ -1,71 +1,95 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
-import ApplicationForm from "@/components/ApplicationForm";
+import FeaturedPost from "@/components/FeaturedPost";
 import BlogGrid from "@/components/BlogGrid";
+import ApplicationForm from "@/components/ApplicationForm";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
-export default function Home() {
-  return (
-    <main className="min-h-screen bg-background selection:bg-blue-500/20">
-      <Navbar />
-      <Hero />
+export const revalidate = 60; // Revalidate every minute
 
-      {/* Recent Posts Section (New) */}
-      <section className="py-20 bg-secondary/30 border-y border-border/50">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <h2 className="text-3xl font-bold mb-4">Latest Insights</h2>
-              <p className="text-muted-foreground">Automated updates from the AI engine.</p>
-            </div>
-            <Link href="/blog" className="text-blue-500 hover:text-blue-600 font-medium flex items-center gap-2">
-              View All Posts <span>→</span>
+export default async function Home() {
+  // Fetch the latest post for the Featured section
+  const { data: posts } = await supabase
+    .from("posts")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(1);
+
+  const featuredPost = posts?.[0];
+
+  return (
+    <main className="min-h-screen bg-background text-foreground font-sans">
+      <Navbar />
+
+      {/* 1. Featured Section: The most important "Authority" post */}
+      {featuredPost ? (
+        <FeaturedPost post={featuredPost} />
+      ) : (
+        <div className="pt-32 pb-20 text-center container mx-auto">
+          <div className="p-12 bg-secondary/30 rounded-3xl border border-dashed border-border mx-auto max-w-2xl">
+            <h2 className="text-2xl font-bold mb-2">No Posts Yet</h2>
+            <p className="text-muted-foreground">Run your automation to see the first post here.</p>
+          </div>
+        </div>
+      )}
+
+      <div className="container mx-auto px-6 py-16 grid lg:grid-cols-[1fr_350px] gap-12">
+        {/* 2. Main Content: Latest News Stream (AI Content) */}
+        <section>
+          <div className="flex items-center justify-between mb-8 border-b border-border pb-4">
+            <h2 className="text-2xl font-bold">Latest Insights</h2>
+            <Link href="/blog" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              View All →
             </Link>
           </div>
-          <BlogGrid limit={3} />
-        </div>
-      </section>
+          <BlogGrid limit={6} />
+        </section>
 
-      <section id="services" className="py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-16">모든 AI 부동산 서비스</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-8 rounded-3xl bg-background border border-border shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">📊</div>
-              <h3 className="text-xl font-bold mb-4">AI 부동산 분석</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                빅데이터와 AI를 활용하여 광주/광산구 지역의 정확한 시세와 전망을 분석해드립니다.
-              </p>
+        {/* 3. Sidebar: Consultation & Branding (The "Money" part) */}
+        <aside className="space-y-8">
+          {/* Profile / Branding Widget */}
+          <div className="p-8 rounded-2xl border border-border bg-card sticky top-24 shadow-sm">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-6 shadow-lg shadow-blue-600/20">
+              N
             </div>
-            <div className="p-8 rounded-3xl bg-background border border-border shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">🏠</div>
-              <h3 className="text-xl font-bold mb-4">맞춤 매물 추천</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                고객님의 라이프스타일과 예산에 딱 맞는 최적의 매물을 AI가 찾아드립니다.
-              </p>
-            </div>
-            <div className="p-8 rounded-3xl bg-background border border-border shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center mb-6 mx-auto text-2xl">💬</div>
-              <h3 className="text-xl font-bold mb-4">전문가 상담</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                복잡한 부동산 세금, 법률 문제까지. 전문 공인중개사가 친절하게 상담해드립니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="py-20 bg-secondary/20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-blue-500/5 blur-[100px] -z-10" />
-        <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">무료 상담 신청</h2>
-            <p className="text-muted-foreground text-lg">
-              궁금한 점이 있으신가요? 연락처를 남겨주시면 빠르게 안내해드리겠습니다.
+            <h3 className="text-xl font-bold mb-2">Nadoo AI Agent</h3>
+            <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+              Data-driven real estate insights. Creating value through AI analysis and local expertise.
             </p>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 text-sm font-medium text-green-600 dark:text-green-400">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span>Accepting New Clients</span>
+              </div>
+              <Link href="#contact" className="block w-full py-3 bg-primary text-primary-foreground text-center rounded-xl font-bold hover:opacity-90 transition-opacity shadow-md">
+                Request Consultation
+              </Link>
+            </div>
           </div>
-          <div className="bg-background rounded-3xl border border-border shadow-xl p-1 md:p-8">
+
+          {/* Popular Topics */}
+          <div className="p-8 rounded-2xl border border-border bg-card shadow-sm">
+            <h3 className="text-lg font-bold mb-4">Trending Topics</h3>
+            <div className="flex flex-wrap gap-2">
+              {["Real Estate", "AI Analysis", "Market Trends", "Investment", "Gwangju"].map((tag) => (
+                <span key={tag} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      {/* 4. Consultation Section (Bottom) */}
+      <section id="contact" className="py-20 bg-secondary/20 relative border-t border-border/50">
+        <div className="container mx-auto px-6 max-w-2xl text-center">
+          <h2 className="text-3xl font-bold mb-4">Professional Consultation</h2>
+          <p className="text-muted-foreground text-lg mb-10">
+            Have questions about real estate investment or market trends?
+          </p>
+          <div className="bg-background rounded-3xl border border-border shadow-2xl p-6 md:p-10 text-left">
             <ApplicationForm />
           </div>
         </div>
