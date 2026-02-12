@@ -13,10 +13,10 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <span className="inline-block py-1 px-3 rounded-full bg-secondary text-secondary-foreground text-sm font-medium mb-6">
+                        <span className="inline-block py-1.5 px-4 rounded-full bg-blue-500/10 text-blue-500 text-sm font-semibold mb-6 border border-blue-500/20">
                             AI-Powered Real Estate Portfolio
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/70">
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 pb-2">
                             Automate Your Content. <br />
                             Dominate the Market.
                         </h1>
@@ -27,12 +27,12 @@ export default function Hero() {
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link href="#apply" className="w-full sm:w-auto">
-                                <button className="w-full sm:w-auto px-8 py-4 bg-foreground text-background rounded-full font-semibold text-lg hover:opacity-90 transition-opacity">
+                                <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white rounded-full font-bold text-lg hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
                                     Get Survival Package
                                 </button>
                             </Link>
-                            <Link href="#blog" className="w-full sm:w-auto">
-                                <button className="w-full sm:w-auto px-8 py-4 bg-secondary text-secondary-foreground rounded-full font-semibold text-lg hover:bg-secondary/80 transition-colors">
+                            <Link href="/blog" className="w-full sm:w-auto">
+                                <button className="w-full sm:w-auto px-8 py-4 bg-secondary text-secondary-foreground rounded-full font-bold text-lg hover:bg-secondary/80 transition-all border border-border hover:border-primary/20">
                                     View Demo Blog
                                 </button>
                             </Link>
@@ -42,7 +42,8 @@ export default function Hero() {
             </div>
 
             {/* Background Gradient */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/5 blur-[120px] rounded-full -z-10" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-500/10 blur-[120px] rounded-full -z-10" />
+            <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-purple-500/5 blur-[100px] rounded-full -z-10" />
         </section>
     );
 }
