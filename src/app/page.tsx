@@ -52,7 +52,8 @@ export default async function Home() {
           <div className="sticky top-24 space-y-8">
             {/* Premium Service Widget */}
             <div className="p-0 rounded-2xl border border-yellow-500/30 bg-gradient-to-b from-slate-900 to-black shadow-xl overflow-hidden group relative">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1639322537228-ad7117a3ee8f?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 transition-opacity group-hover:opacity-30"></div>
+              {/* Using a high-quality robot/AI image */}
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 transition-opacity group-hover:opacity-50"></div>
 
               <div className="relative z-10 p-8">
                 <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-2xl flex items-center justify-center text-black text-3xl font-bold mb-6 shadow-lg shadow-amber-500/20">
