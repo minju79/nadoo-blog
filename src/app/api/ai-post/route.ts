@@ -101,7 +101,10 @@ export async function POST(req: Request) {
             try {
                 const imageResponse = await openai.images.generate({
                     model: "dall-e-3",
-                    prompt: `Editorial illustration, minimalist, high-tech, 3d render. ${imagePrompt}`,
+                    prompt: `A professional, abstract, and modern digital illustration representing "${imagePrompt || finalTitle}".
+                Style: Minimalist 3D render, isometric, glassmorphism, soft gradients (blue, purple, gold).
+                Focus on abstract shapes, data visualization, connectivity, and business growth.
+                NO ROBOTS, NO HUMANS, NO TEXT. Clean and sophisticated corporate tech blog style.`,
                     n: 1,
                     size: "1024x1024",
                 });

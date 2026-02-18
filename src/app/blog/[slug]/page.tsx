@@ -1,55 +1,30 @@
-import { supabase } from "@/lib/supabase";
-import { notFound } from "next/navigation";
-import { format } from "date-fns";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Link from "next/link";
-import BlogControls from "@/components/BlogControls";
-import { Metadata } from "next";
+import RelatedPosts from "@/components/RelatedPosts";
 
-interface Props {
-    params: Promise<{ slug: string }>;
-}
-
-export const revalidate = 60;
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
-    const { data: post } = await supabase
-        .from("posts")
-        .select("title, excerpt")
-        .eq("slug", slug)
-        .single();
-
-    if (!post) {
-        return {
-            title: "Post Not Found",
-        };
-    }
-
-    return {
-        title: `${post.title} | NADOO_AI Blog`,
-        description: post.excerpt,
-    };
-}
+// ... (other imports)
 
 export default async function BlogPostPage({ params }: Props) {
-    const { slug } = await params;
-    const { data: post } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("slug", slug)
-        .single();
-
-    if (!post) {
-        notFound();
-    }
+    // ...
 
     return (
-        <main className="min-h-screen bg-background pb-20">
+        <main className="min-h-screen bg-background pb-20 relative">
+            <ScrollProgress />
+            <TableOfContents content={post.content} />
             <Navbar />
 
             <article className="pt-32 pb-20 container mx-auto px-6 max-w-[800px]">
+                {/* ... existing article content ... */}
+
+                <div className="prose prose-invert prose-lg max-w-none">
+                    <div dangerouslySetInnerHTML={{ __html: post.content || "" }} />
+                </div>
+
+                <RelatedPosts currentSlug={slug} category={post.category || 'General'} />
+            </article>
+
+            <Footer />
+        </main>
+    );
+}
                 <div className="flex justify-between items-center mb-8">
                     <Link href="/blog" className="text-muted-foreground hover:text-foreground">
                         ← Back to Blog
@@ -74,9 +49,9 @@ export default async function BlogPostPage({ params }: Props) {
                 <div className="prose prose-invert prose-lg max-w-none">
                     <div dangerouslySetInnerHTML={{ __html: post.content || "" }} />
                 </div>
-            </article>
+            </article >
 
-            <Footer />
-        </main>
+    <Footer />
+        </main >
     );
 }

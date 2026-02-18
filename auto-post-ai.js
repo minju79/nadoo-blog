@@ -165,9 +165,10 @@ async function generateAndPost() {
         try {
             const imageResponse = await openai.images.generate({
             model: "dall-e-3",
-        prompt: `Editorial photo of "${cleanTitle}".
-        Style: High-end tech magazine cover, minimal, clean workspace, futuristic device, soft lighting, 8k resolution.
-        No text, no robots. Just clean, professional aesthetic.`,
+        prompt: `A professional, abstract, and modern digital illustration representing "${cleanTitle}".
+        Style: Minimalist 3D render, isometric, glassmorphism, soft gradients (blue, purple, gold).
+        Focus on abstract shapes, data visualization, connectivity, and business growth.
+        NO ROBOTS, NO HUMANS, NO TEXT. Clean and sophisticated corporate tech blog style.`,
         n: 1,
         size: "1024x1024",
             });

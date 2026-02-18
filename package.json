@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "auto-post": "node auto-post.js"
+    "auto-post": "node auto-post-ai.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",

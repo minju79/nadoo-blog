@@ -28,6 +28,12 @@ export default function Navbar() {
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
                         Write
                     </Link>
+                    <Link href="https://nadooai-ay4nv8rj.manus.space/" target="_blank" className="text-amber-500/80 hover:text-amber-400 transition-colors uppercase tracking-wide flex items-center gap-1">
+                        <span>🌐</span> Hub
+                    </Link>
+                    <Link href="https://ai-real-estate-2026-app.vercel.app/" target="_blank" className="text-amber-500/80 hover:text-amber-400 transition-colors uppercase tracking-wide flex items-center gap-1">
+                        <span>🏠</span> 부동산
+                    </Link>
                     <Link href="#apply">
                         <button className="bg-gradient-to-r from-amber-500 to-yellow-600 text-black px-6 py-2 rounded-full hover:scale-105 transition-transform font-bold shadow-lg shadow-amber-500/20">
                             맞춤 AI 제작 문의

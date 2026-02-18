@@ -2,60 +2,85 @@
 const fs = require('fs');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
+const matter = require('gray-matter'); // We might need to install gray-matter or just parse manually
 require('dotenv').config({ path: '.env.local' });
 
-// Configuration
-const OBSIDIAN_PATH = String.raw`c:\Users\samsung\OneDrive\바탕 화면\옵시디언`;
-const PUBLISH_TAG = '#publish'; // Only publish files with this tag
-const VALID_EXTENSIONS = ['.md'];
+// Install gray-matter if not present: npm install gray-matter
+// But to avoid dependency hell, let's use a simple regex parser if user doesn't want to install more.
+// For now, I'll assume simple parsing or ask user to install gray-matter. 
+// Let's us simple parsing to be robust.
 
-// Supabase Setup
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-    console.error('❌ Missing Supabase credentials in .env.local');
+    console.error('❌ Missing Supabase credentials');
     process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function publishFile(filePath) {
-    try {
-        const content = fs.readFileSync(filePath, 'utf8');
+// 📂 Configuration: Folder to scan for markdown files
+// Default: Look for a folder named "publish_queue" in the project root
+const PUBLISH_DIR = path.join(__dirname, '..', 'publish_queue');
 
-        // Simple Frontmatter Parser (between ---)
-        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-        let title = path.basename(filePath, '.md');
-        let category = 'Thinking'; // Default category
-        let slug = title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\uAC00-\uD7A3-]/g, '');
-        let cleanContent = content;
-        let thumbnail_url = '';
+async function publishObsidianNotes() {
+    console.log(`📂 Scanning for markdown files in: ${PUBLISH_DIR}`);
 
-        if (frontmatterMatch) {
-            const frontmatter = frontmatterMatch[1];
-            cleanContent = content.replace(frontmatterMatch[0], '').trim();
+    if (!fs.existsSync(PUBLISH_DIR)) {
+        console.log(`⚠️ Folder not found. Creating it now...`);
+        fs.mkdirSync(PUBLISH_DIR);
+        console.log(`✅ Folder created! Put your Obsidian .md files here to publish.`);
+        return;
+    }
 
-            // Extract metadata from frontmatter
-            const titleMatch = frontmatter.match(/title:\s*(.*)/);
-            if (titleMatch) title = titleMatch[1].trim();
+    const files = fs.readdirSync(PUBLISH_DIR).filter(file => file.endsWith('.md'));
 
-            const categoryMatch = frontmatter.match(/category:\s*(.*)/);
-            if (categoryMatch) category = categoryMatch[1].trim();
+    if (files.length === 0) {
+        console.log('📭 No markdown files found to publish.');
+        return;
+    }
 
-            const slugMatch = frontmatter.match(/slug:\s*(.*)/);
+    console.log(`🚀 Found ${files.length} files. Starting publish process...`);
+
+    for (const file of files) {
+        const filePath = path.join(PUBLISH_DIR, file);
+        const contentRaw = fs.readFileSync(filePath, 'utf8');
+
+        // Simple Frontmatter Parser
+        const parts = contentRaw.split(/^---$/gm);
+        let content = contentRaw;
+        let title = file.replace('.md', '');
+        let slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w\uAC00-\uD7A3-]/g, '');
+        let category = "Thinking"; // Default category
+        let excerpt = "";
+
+        if (parts.length >= 3) {
+            // Has frontmatter
+            const frontmatter = parts[1];
+            content = parts.slice(2).join('---').trim();
+
+            // Extract metadata via Regex
+            const titleMatch = frontmatter.match(/title:\s*(.+)/);
+            if (titleMatch) title = titleMatch[1].trim().replace(/^['"]|['"]$/g, '');
+
+            const slugMatch = frontmatter.match(/slug:\s*(.+)/);
             if (slugMatch) slug = slugMatch[1].trim();
 
-            const imageMatch = frontmatter.match(/image:\s*(.*)/);
-            if (imageMatch) thumbnail_url = imageMatch[1].trim();
+            const categoryMatch = frontmatter.match(/category:\s*(.+)/);
+            if (categoryMatch) category = categoryMatch[1].trim();
+
+            const excerptMatch = frontmatter.match(/excerpt:\s*(.+)/);
+            if (excerptMatch) excerpt = excerptMatch[1].trim();
         }
 
-        // Check for #publish tag if strict mode
-        // if (!content.includes(PUBLISH_TAG)) return;
+        // Convert Obsidian Image Links ![[image.png]] to standard MD or remove?
+        // For now, simple cleanup.
+        content = content.replace(/!\[\[(.*?)\]\]/g, '(Image: $1)');
 
-        console.log(`📤 Publishing: ${title} (${slug})`);
+        console.log(`Processing: ${title}...`);
 
-        // Check if exists
+        // Check for duplicate
         const { data: existing } = await supabase
             .from('posts')
             .select('id')
@@ -63,63 +88,29 @@ async function publishFile(filePath) {
             .single();
 
         if (existing) {
-            // Update
-            const { error } = await supabase
-                .from('posts')
-                .update({
-                    title,
-                    content: cleanContent, // TODO: Convert Markdown to HTML if needed, or render Markdown on frontend
-                    category,
-                    published: true,
-                    updated_at: new Date().toISOString()
-                })
-                .eq('slug', slug);
+            console.log(`⚠️ Post already exists: ${title} (Skipping structure check)`);
+        }
 
-            if (error) console.error(`❌ Update failed for ${title}:`, error.message);
-            else console.log(`✅ Updated: ${title}`);
+        const { error } = await supabase
+            .from('posts')
+            .upsert({
+                title,
+                slug,
+                content: `<div class="markdown-body">${content.replace(/\n/g, '<br>')}</div>`, // Simple HTML conversion
+                excerpt: excerpt || content.substring(0, 150) + "...",
+                category,
+                published: true,
+                thumbnail_url: "https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=1000&auto=format&fit=crop" // Default Obsidian-like abstract image
+            }, { onConflict: 'slug' });
 
+        if (error) {
+            console.error(`❌ Failed to publish ${title}:`, error.message);
         } else {
-            // Insert
-            const { error } = await supabase
-                .from('posts')
-                .insert({
-                    title,
-                    slug,
-                    content: cleanContent,
-                    category,
-                    published: true,
-                    thumbnail_url
-                });
-
-            if (error) console.error(`❌ Insert failed for ${title}:`, error.message);
-            else console.log(`🎉 Created: ${title}`);
-        }
-
-    } catch (error) {
-        console.error(`❌ Error processing ${filePath}:`, error.message);
-    }
-}
-
-async function scanDirectory(directory) {
-    const files = fs.readdirSync(directory);
-
-    for (const file of files) {
-        const fullPath = path.join(directory, file);
-        const stat = fs.statSync(fullPath);
-
-        if (stat.isDirectory()) {
-            if (file.startsWith('.')) continue; // Skip hidden folders
-            await scanDirectory(fullPath);
-        } else if (stat.isFile() && VALID_EXTENSIONS.includes(path.extname(file))) {
-            // Logic to determine if we should publish this file
-            // For now, let's look for a specific folder or tag
-            // Example: Only publish files in "03-Snippets" or "Published" folder
-            if (fullPath.includes('03-Snippets') || fullPath.includes('Published')) {
-                await publishFile(fullPath);
-            }
+            console.log(`✅ Published: ${title}`);
+            // Move processed file? Or leave it?
+            // fs.renameSync(filePath, path.join(PUBLISH_DIR, 'processed', file)); // Optional
         }
     }
 }
 
-console.log(`🚀 Starting Obsidian Sync from: ${OBSIDIAN_PATH}`);
-scanDirectory(OBSIDIAN_PATH);
+publishObsidianNotes();
