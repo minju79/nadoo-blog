@@ -10,7 +10,7 @@ export default function BlogControls({ postId }: { postId: string }) {
 
     const handleDelete = async () => {
         const password = prompt("비밀번호를 입력하세요 (관리자 확인용):");
-        if (password !== "nadoo1234") {
+        if (password !== "nadoo3379") {
             alert("비밀번호가 틀렸습니다.");
             return;
         }
@@ -32,7 +32,7 @@ export default function BlogControls({ postId }: { postId: string }) {
 
     const handleEdit = () => {
         const password = prompt("비밀번호를 입력하세요 (관리자 확인용):");
-        if (password !== "nadoo1234") {
+        if (password !== "nadoo3379") {
             alert("비밀번호가 틀렸습니다.");
             return;
         }
