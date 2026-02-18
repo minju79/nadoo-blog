@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import PostCard from "./PostCard";
+import BlogList from "./BlogList";
 
 export default async function BlogGrid({ limit }: { limit?: number }) {
     let query = supabase
@@ -22,11 +22,5 @@ export default async function BlogGrid({ limit }: { limit?: number }) {
         );
     }
 
-    return (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-                <PostCard key={post.id} post={post} />
-            ))}
-        </div>
-    );
+    return <BlogList posts={posts} />;
 }

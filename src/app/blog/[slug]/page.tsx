@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import BlogControls from "@/components/BlogControls";
 import { Metadata } from "next";
 
 interface Props {
@@ -49,9 +50,12 @@ export default async function BlogPostPage({ params }: Props) {
             <Navbar />
 
             <article className="pt-32 pb-20 container mx-auto px-6 max-w-[800px]">
-                <Link href="/blog" className="text-muted-foreground hover:text-foreground mb-8 inline-block">
-                    ← Back to Blog
-                </Link>
+                <div className="flex justify-between items-center mb-8">
+                    <Link href="/blog" className="text-muted-foreground hover:text-foreground">
+                        ← Back to Blog
+                    </Link>
+                    <BlogControls postId={post.id} />
+                </div>
 
                 <header className="mb-12 text-center">
                     <span className="text-muted-foreground text-sm mb-4 block">

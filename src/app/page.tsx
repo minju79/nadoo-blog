@@ -50,23 +50,27 @@ export default async function Home() {
         {/* 3. Sidebar: Consultation & Branding (The "Money" part) */}
         <aside>
           <div className="sticky top-24 space-y-8">
-            {/* Profile / Branding Widget */}
-            <div className="p-8 rounded-2xl border border-border bg-card shadow-sm">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-6 shadow-lg shadow-blue-600/20">
-                N
-              </div>
-              <h3 className="text-xl font-bold mb-2">NADOO_AI Agent</h3>
-              <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                Data-driven AI trends & insights. Creating value through AI analysis and local expertise.
-              </p>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 text-sm font-medium text-green-600 dark:text-green-400">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span>Accepting New Clients</span>
+            {/* Premium Service Widget */}
+            <div className="p-0 rounded-2xl border border-yellow-500/30 bg-gradient-to-b from-slate-900 to-black shadow-xl overflow-hidden group relative">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1639322537228-ad7117a3ee8f?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 transition-opacity group-hover:opacity-30"></div>
+
+              <div className="relative z-10 p-8">
+                <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-2xl flex items-center justify-center text-black text-3xl font-bold mb-6 shadow-lg shadow-amber-500/20">
+                  AI
                 </div>
-                <Link href="#contact" className="block w-full py-3 bg-primary text-primary-foreground text-center rounded-xl font-bold hover:opacity-90 transition-opacity shadow-md">
-                  Request Consultation
-                </Link>
+                <h3 className="text-2xl font-bold mb-2 text-white">맞춤 AI 에이전트 제작</h3>
+                <p className="text-gray-300 text-sm mb-6 leading-relaxed">
+                  당신의 비즈니스에 딱 맞는 AI 비서를 만들어 드립니다. 반복 업무 자동화부터 고객 응대까지.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 text-sm font-bold text-yellow-400">
+                    <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+                    <span>월 3팀 한정 제작</span>
+                  </div>
+                  <Link href="#contact" className="block w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 text-black text-center rounded-xl font-bold hover:scale-[1.02] transition-transform shadow-lg shadow-amber-500/20">
+                    무료 견적 받기 →
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -90,9 +94,14 @@ export default async function Home() {
       {/* 4. Consultation Section (Bottom) */}
       <section id="contact" className="py-20 bg-secondary/20 relative border-t border-border/50">
         <div className="container mx-auto px-6 max-w-2xl text-center">
-          <h2 className="text-3xl font-bold mb-4">맞춤 AI 솔루션 제작 문의</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              비즈니스 혁신
+            </span>
+            , AI로 시작하세요
+          </h2>
           <p className="text-muted-foreground text-lg mb-10">
-            부동산 업무 자동화, 나만의 AI 비서 제작에 대해 궁금하신가요?
+            비즈니스 업무 자동화, 나만의 AI 비서 제작에 대해 궁금하신가요?
           </p>
           <div className="bg-background rounded-3xl border border-border shadow-2xl p-6 md:p-10 text-left">
             <ApplicationForm />

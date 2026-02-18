@@ -11,6 +11,7 @@ interface Post {
     excerpt?: string;
     thumbnail_url?: string;
     created_at: string;
+    category?: string;
 }
 
 export default function FeaturedPost({ post }: { post: Post }) {
@@ -44,6 +45,11 @@ export default function FeaturedPost({ post }: { post: Post }) {
                         <span className="px-3 py-1 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider rounded-full">
                             Featured
                         </span>
+                        {post.category && (
+                            <span className="px-3 py-1 bg-white/10 backdrop-blur text-white text-xs font-bold uppercase tracking-wider rounded-full border border-white/20">
+                                {post.category}
+                            </span>
+                        )}
                         <span className="text-white/80 text-sm">
                             {format(new Date(post.created_at), "MMMM d, yyyy")}
                         </span>
