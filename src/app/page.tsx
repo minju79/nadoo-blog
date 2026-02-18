@@ -55,7 +55,7 @@ export default async function Home() {
             </div>
             <h3 className="text-xl font-bold mb-2">NADOO_AI Agent</h3>
             <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-              Data-driven real estate insights. Creating value through AI analysis and local expertise.
+              Data-driven AI trends & insights. Creating value through AI analysis and local expertise.
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm font-medium text-green-600 dark:text-green-400">
@@ -72,7 +72,7 @@ export default async function Home() {
           <div className="p-8 rounded-2xl border border-border bg-card shadow-sm">
             <h3 className="text-lg font-bold mb-4">Trending Topics</h3>
             <div className="flex flex-wrap gap-2">
-              {["Real Estate", "AI Analysis", "Market Trends", "Investment", "Gwangju"].map((tag) => (
+              {["Real Estate", "AI Analysis", "Market Trends", "Generative AI", "LLM"].map((tag) => (
                 <span key={tag} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer">
                   #{tag}
                 </span>

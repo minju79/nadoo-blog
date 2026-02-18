@@ -6,18 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "auto-post": "node auto-post.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.4",
     "framer-motion": "^12.34.0",
     "lucide-react": "^0.563.0",
     "next": "16.1.6",
+    "openai": "^6.21.0",
     "pocketbase": "^0.26.8",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "rss-parser": "^3.13.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
