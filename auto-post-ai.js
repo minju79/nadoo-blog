@@ -165,10 +165,11 @@ async function generateAndPost() {
         try {
             const imageResponse = await openai.images.generate({
             model: "dall-e-3",
-        prompt: `A professional, abstract, and modern digital illustration representing "${cleanTitle}".
-        Style: Minimalist 3D render, isometric, glassmorphism, soft gradients (blue, purple, gold).
-        Focus on abstract shapes, data visualization, connectivity, and business growth.
-        NO ROBOTS, NO HUMANS, NO TEXT. Clean and sophisticated corporate tech blog style.`,
+        prompt: `A cute, friendly, and high-quality 3D render of a futuristic robot assistant helping with "${cleanTitle}".
+        Style: Pixar/Disney animation style, bright and warm lighting, soft round edges.
+        Mood: Happy, helpful, innovative, optimistic.
+        Elements: A cute small robot with big eyes, glowing blue screens, clean white plastic materials.
+        IMPORTANT: NO SCARY ROBOTS, NO DARK DYSTOPIAN VIBES, NO RED EYES. Make it look like a friendly tech helper.`,
         n: 1,
         size: "1024x1024",
             });
@@ -192,7 +193,7 @@ async function generateAndPost() {
         'Authorization': `Bearer ${CRON_SECRET} `
             },
         body: JSON.stringify({
-            title: `[AI 속보] ${aiTitle} `,
+            title: aiTitle,
         content: finalContent,
         thumbnail_url: imageUrl,
         category: 'AI News',

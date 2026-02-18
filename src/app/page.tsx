@@ -7,7 +7,7 @@ import ChatBot from "@/components/ChatBot";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
-export const revalidate = 60; // Revalidate every minute
+export const revalidate = 0; // Disable cache for immediate updates
 
 export default async function Home() {
   // Fetch the latest post for the Featured section

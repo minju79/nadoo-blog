@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogGrid from "@/components/BlogGrid";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default function BlogListingPage() {
     return (

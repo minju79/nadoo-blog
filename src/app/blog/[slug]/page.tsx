@@ -2,6 +2,7 @@ import RelatedPosts from "@/components/RelatedPosts";
 
 // ... (other imports)
 
+export const revalidate = 0;
 export default async function BlogPostPage({ params }: Props) {
     // ...
 

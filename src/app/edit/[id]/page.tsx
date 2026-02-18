@@ -68,7 +68,7 @@ export default function EditPage({ params }: Props) {
         e.preventDefault();
 
         // 🔒 Simple Security Check
-        if (formData.accessCode !== "nadoo1234") {
+        if (formData.accessCode !== "nadoo3379") {
             alert("❌ Incorrect Access Code!");
             return;
         }
