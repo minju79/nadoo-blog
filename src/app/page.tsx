@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import FeaturedPost from "@/components/FeaturedPost";
 import BlogGrid from "@/components/BlogGrid";
 import ApplicationForm from "@/components/ApplicationForm";
+import ChatBot from "@/components/ChatBot";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
@@ -47,40 +48,44 @@ export default async function Home() {
         </section>
 
         {/* 3. Sidebar: Consultation & Branding (The "Money" part) */}
-        <aside className="space-y-8">
-          {/* Profile / Branding Widget */}
-          <div className="p-8 rounded-2xl border border-border bg-card sticky top-24 shadow-sm">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-6 shadow-lg shadow-blue-600/20">
-              N
-            </div>
-            <h3 className="text-xl font-bold mb-2">NADOO_AI Agent</h3>
-            <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-              Data-driven AI trends & insights. Creating value through AI analysis and local expertise.
-            </p>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm font-medium text-green-600 dark:text-green-400">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span>Accepting New Clients</span>
+        <aside>
+          <div className="sticky top-24 space-y-8">
+            {/* Profile / Branding Widget */}
+            <div className="p-8 rounded-2xl border border-border bg-card shadow-sm">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-6 shadow-lg shadow-blue-600/20">
+                N
               </div>
-              <Link href="#contact" className="block w-full py-3 bg-primary text-primary-foreground text-center rounded-xl font-bold hover:opacity-90 transition-opacity shadow-md">
-                Request Consultation
-              </Link>
+              <h3 className="text-xl font-bold mb-2">NADOO_AI Agent</h3>
+              <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                Data-driven AI trends & insights. Creating value through AI analysis and local expertise.
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-sm font-medium text-green-600 dark:text-green-400">
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span>Accepting New Clients</span>
+                </div>
+                <Link href="#contact" className="block w-full py-3 bg-primary text-primary-foreground text-center rounded-xl font-bold hover:opacity-90 transition-opacity shadow-md">
+                  Request Consultation
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Popular Topics */}
-          <div className="p-8 rounded-2xl border border-border bg-card shadow-sm">
-            <h3 className="text-lg font-bold mb-4">Trending Topics</h3>
-            <div className="flex flex-wrap gap-2">
-              {["Real Estate", "AI Analysis", "Market Trends", "Generative AI", "LLM"].map((tag) => (
-                <span key={tag} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer">
-                  #{tag}
-                </span>
-              ))}
+            {/* Popular Topics */}
+            <div className="p-8 rounded-2xl border border-border bg-card shadow-sm">
+              <h3 className="text-lg font-bold mb-4">Trending Topics</h3>
+              <div className="flex flex-wrap gap-2">
+                {["Generative AI", "LLM", "Automation", "ChatGPT", "Future Tech"].map((tag) => (
+                  <span key={tag} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </aside>
       </div>
+
+      <ChatBot />
 
       {/* 4. Consultation Section (Bottom) */}
       <section id="contact" className="py-20 bg-secondary/20 relative border-t border-border/50">
