@@ -34,10 +34,8 @@ export default function Navbar() {
                     <Link href="https://ai-real-estate-2026-app.vercel.app/" target="_blank" className="text-amber-500/80 hover:text-amber-400 transition-colors uppercase tracking-wide flex items-center gap-1">
                         <span>🏠</span> 부동산
                     </Link>
-                    <Link href="#apply">
-                        <button className="bg-gradient-to-r from-amber-500 to-yellow-600 text-black px-6 py-2 rounded-full hover:scale-105 transition-transform font-bold shadow-lg shadow-amber-500/20">
-                            맞춤 AI 제작 문의
-                        </button>
+                    <Link href="#apply" className="bg-gradient-to-r from-amber-500 to-yellow-600 text-black px-6 py-2 rounded-full hover:scale-105 transition-transform font-bold shadow-lg shadow-amber-500/20">
+                        맞춤 AI 제작 문의
                     </Link>
                 </div>
             </div>

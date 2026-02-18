@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { format } from "date-fns";
-import { motion } from "framer-motion";
+
 
 interface Post {
     id: string;
