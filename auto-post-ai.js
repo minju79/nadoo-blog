@@ -162,6 +162,7 @@ async function generateAndPost() {
                 title: `[AI 속보] ${ aiTitle } `,
                 content: finalContent,
                 thumbnail_url: imageUrl,
+                category: 'AI News',
                 published: true
             })
         });

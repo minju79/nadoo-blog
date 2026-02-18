@@ -15,6 +15,7 @@ export default function WritePage() {
         thumbnail_url: "",
         excerpt: "",
         content: "",
+        category: "General",
     });
 
     const generateSlug = (text: string) => {
@@ -52,6 +53,7 @@ export default function WritePage() {
                     content: formData.content,
                     excerpt: formData.excerpt,
                     thumbnail_url: formData.thumbnail_url,
+                    category: formData.category,
                     published: true,
                     created_at: new Date().toISOString(),
                 },
@@ -176,6 +178,22 @@ export default function WritePage() {
                         <p className="text-xs text-muted-foreground mt-2">
                             Tip: You can use HTML tags like &lt;h2&gt;, &lt;p&gt;, &lt;strong&gt;, &lt;ul&gt; for formatting.
                         </p>
+                    </div>
+
+                    {/* Category Selection */}
+                    <div>
+                        <label className="block text-sm font-medium mb-2">Category</label>
+                        <select
+                            className="w-full px-4 py-3 rounded-xl bg-secondary border border-transparent focus:border-primary outline-none transition-colors"
+                            value={formData.category}
+                            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                        >
+                            <option value="General">General</option>
+                            <option value="AI News">AI News</option>
+                            <option value="Tech Reviews">Tech Reviews</option>
+                            <option value="Tutorials">Tutorials</option>
+                            <option value="Thinking">Thinking</option>
+                        </select>
                     </div>
 
                     <button
